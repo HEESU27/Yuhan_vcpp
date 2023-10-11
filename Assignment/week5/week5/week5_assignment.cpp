@@ -13,31 +13,31 @@ int isMouseLButtonPressed = 0;
 int isMouseRButtonPressed = 0;
 
 
-HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 255)); // ºĞÈ«»ö
-HBRUSH clear = CreateSolidBrush(RGB(255, 255, 255)); // Èò»ö
-HBRUSH black = CreateSolidBrush(RGB(0, 0, 0)); // °ËÁ¤»ö
+HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 255)); // ë¶„í™ìƒ‰
+HBRUSH clear = CreateSolidBrush(RGB(255, 255, 255)); // í°ìƒ‰
+HBRUSH black = CreateSolidBrush(RGB(0, 0, 0)); // ê²€ì •ìƒ‰
 
-// À©µµ¿ìÀÇ ÀÌº¥Æ®¸¦ Ã³¸®ÇÏ´Â Äİ¹é(Callback) ÇÔ¼ö
+// ìœˆë„ìš°ì˜ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ëŠ” ì½œë°±(Callback) í•¨ìˆ˜
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
-	case WM_LBUTTONDOWN: // ¸¶¿ì½º ¹öÆ°À» ³õ¾ÒÀ» ¶§
+	case WM_LBUTTONDOWN: // ë§ˆìš°ìŠ¤ ë²„íŠ¼ì„ ë†“ì•˜ì„ ë•Œ
 	{
-		startPoint.x = LOWORD(lParam); // °¡·Î ±æÀÌ
-		startPoint.y = HIWORD(lParam); // ¼¼·Î ³ôÀÌ
+		startPoint.x = LOWORD(lParam); // ê°€ë¡œ ê¸¸ì´
+		startPoint.y = HIWORD(lParam); // ì„¸ë¡œ ë†’ì´
 		isMouseLButtonPressed = 1;
 	}
 	break;
 
-	case WM_LBUTTONUP: // ¸¶¿ì½º ¹öÆ° ´­·¶À» ¶§
+	case WM_LBUTTONUP: // ë§ˆìš°ìŠ¤ ë²„íŠ¼ ëˆŒë €ì„ ë•Œ
 	{
 		if (isMouseLButtonPressed)
 		{
 			endPoint.x = LOWORD(lParam);
 			endPoint.y = HIWORD(lParam);
 			isMouseLButtonPressed = 0;
-			// WM_PAINT ¸Ş½ÃÁö¸¦ À¯¹ßÇÏ¿© ³×¸ğ¸¦ È­¸é¿¡ ±×¸³´Ï´Ù
+			// WM_PAINT ë©”ì‹œì§€ë¥¼ ìœ ë°œí•˜ì—¬ ë„¤ëª¨ë¥¼ í™”ë©´ì— ê·¸ë¦½ë‹ˆë‹¤
 			InvalidateRect(hwnd, NULL, TRUE);
 		}
 	}
@@ -132,11 +132,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR pCmdLine, _In_ int nCmdShow)
 #endif
 {
-	// À©µµ¿ì Å¬·¡½º ¼±¾ğ
+	// ìœˆë„ìš° í´ë˜ìŠ¤ ì„ ì–¸
 	WNDCLASS wc;
-	ZeroMemory(&wc, sizeof(wc));	// ¸ğµÎ 0À¸·Î ÃÊ±âÈ­
+	ZeroMemory(&wc, sizeof(wc));	// ëª¨ë‘ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-	// À©µµ¿ì Å¬·¡½º °ª ¼³Á¤
+	// ìœˆë„ìš° í´ë˜ìŠ¤ ê°’ ì„¤ì •
 	wc.hInstance = hInstance;
 	wc.lpszClassName = TEXT("Computer Software");
 	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
@@ -144,23 +144,23 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = WindowProc;
 
-	// À©µµ¿ì Å¬·¡½º µî·Ï
+	// ìœˆë„ìš° í´ë˜ìŠ¤ ë“±ë¡
 	if (RegisterClass(&wc) == 0)
 	{
 		MessageBox(NULL, L"RegisterClass failed!", L"Error", MB_ICONERROR);
-		exit(-1);	// ¿¹¿Ü
+		exit(-1);	// ì˜ˆì™¸
 	}
 
-	// Window viewport ¿µ¿ª Á¶Á¤
+	// Window viewport ì˜ì—­ ì¡°ì •
 	RECT rect = { 150, 100, 800, 600 };
 	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, 0);
 	int width = rect.right - rect.left;
 	int height = rect.bottom - rect.top;
 
-	// À©µµ¿ì »ı¼º
+	// ìœˆë„ìš° ìƒì„±
 	HWND hwnd = CreateWindow(
 		wc.lpszClassName,
-		TEXT("ÄÄ¼Ò Application"),
+		TEXT("ì»´ì†Œ Application"),
 		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
 		0, 0,
 		800, 600,
@@ -169,38 +169,38 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		NULL
 	);
 
-	// ¿À·ù °Ë»ç
+	// ì˜¤ë¥˜ ê²€ì‚¬
 	if (hwnd == NULL)
 	{
 		MessageBox(NULL, L"CreateWindow failed!", L"Error", MB_ICONERROR);
 		exit(-1);
 	}
 
-	// Ã¢ º¸ÀÌ±â
-	ShowWindow(hwnd, SW_SHOW); // Ã¢ ¶ç¿ì°í
-	UpdateWindow(hwnd); // ¾÷µ¥ÀÌÆ®ÇØ¾ß º¸ÀÓ ÇÑ ½ÖÀ¸·Î ¾´´Ù°í º¸¸é µÊ
+	// ì°½ ë³´ì´ê¸°
+	ShowWindow(hwnd, SW_SHOW); // ì°½ ë„ìš°ê³ 
+	UpdateWindow(hwnd); // ì—…ë°ì´íŠ¸í•´ì•¼ ë³´ì„ í•œ ìŒìœ¼ë¡œ ì“´ë‹¤ê³  ë³´ë©´ ë¨
 
 
 
-	// ¸Ş½ÃÁö Ã³¸® ·çÇÁ
+	// ë©”ì‹œì§€ ì²˜ë¦¬ ë£¨í”„
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
 
 	while (msg.message != WM_QUIT)
 	{
-		// ¸Ş½ÃÁö Ã³¸®
+		// ë©”ì‹œì§€ ì²˜ë¦¬
 		if (GetMessage(&msg, hwnd, 0, 0))
-			// if (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE)) // PM_REMOVEÀÇ ÀÚ¸®´Â ÀÌ ¸Ş½ÃÁö¸¦ ¾²°í ¾î¶±ÇÒ °Å³ÄÀÇ ÀÇ¹ÌÀÎµ¥ Áö¿î´Ù´Â °ÍÀÓ
+			// if (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE)) // PM_REMOVEì˜ ìë¦¬ëŠ” ì´ ë©”ì‹œì§€ë¥¼ ì“°ê³  ì–´ë–¡í•  ê±°ëƒì˜ ì˜ë¯¸ì¸ë° ì§€ìš´ë‹¤ëŠ” ê²ƒì„
 		{
 
-			// ¸Ş½ÃÁö ÇØ¼®ÇØÁà
+			// ë©”ì‹œì§€ í•´ì„í•´ì¤˜
 			TranslateMessage(&msg);
-			// ¸Ş½ÃÁö¸¦ Ã³¸®ÇØ¾ßÇÒ °÷¿¡ Àü´ŞÇØÁà
+			// ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•´ì•¼í•  ê³³ì— ì „ë‹¬í•´ì¤˜
 			DispatchMessage(&msg);
 
 		}
 	}
 
-	//Á¾·á ¸Ş½ÃÁö º¸³»±â
+	//ì¢…ë£Œ ë©”ì‹œì§€ ë³´ë‚´ê¸°
 	return (int)msg.wParam;
 }
